@@ -5,13 +5,6 @@ Vue.use(Router);
 
 const routes = [
   {
-    name: 'user',
-    component: () => import('./view/user'),
-    meta: {
-      title: '会员中心'
-    }
-  },
-  {
     name: 'mlogin',
     component: () => import('./view/login'),
     meta: {
