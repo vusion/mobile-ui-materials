@@ -2,14 +2,14 @@ const pkg = require('./package.json');
 const autoprefixer = require('autoprefixer');
 const pxtoviewport = require('postcss-px-to-viewport');
 
-// const assetsDir = 'dist';
+const assetsDir = 'static';
 // const publicPathPrefix = process.env.NODE_ENV === 'production' ? `https://vusion-templates.github.io/${pkg.name}` : '/';
-const publicPathPrefix = '/';
+
 
 module.exports = {
-  // assetsDir,
-  outputDir: 'dist',
-  publicPath: publicPathPrefix,
+  assetsDir,
+  outputDir: 'dist-theme',
+  // publicPath: publicPathPrefix,
   css: {
     loaderOptions: {
       postcss: {
@@ -17,8 +17,7 @@ module.exports = {
           autoprefixer(),
           pxtoviewport({
             viewportWidth: 375,
-            // propList: ["*", "!font-size", "!line-height"],
-            propList: ["*"],
+            propList: ["*", "!font-size", "!line-height"],
             selectorBlackList: ["nov"],
           })
         ]
@@ -27,11 +26,6 @@ module.exports = {
   },
   lintOnSave: false,
   chainWebpack(config) {
-    config.externals({
-      // vue: "Vue",
-      // 'vue-router': 'VueRouter',
-      vant: 'vant',
-    }),
-      config.output.jsonpFunction('webpackJsonp' + pkg.name);
+    config.output.jsonpFunction('webpackJsonp' + pkg.name);
   },
 };
