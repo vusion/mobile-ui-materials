@@ -28,8 +28,8 @@ module.exports = {
   lintOnSave: false,
   chainWebpack(config) {
     config.externals({
-      // vue: "Vue",
-      // 'vue-router': 'VueRouter',
+      vue: "Vue",
+      'vue-router': 'VueRouter',
       vant: 'vant',
     }),
       config.output.jsonpFunction('webpackJsonp' + pkg.name);

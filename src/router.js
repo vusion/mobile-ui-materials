@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import Router from 'vue-router';
+// import Router from 'vue-router';
 
-Vue.use(Router);
+// Vue.use(Router);
 
 const routes = [
   {
@@ -18,7 +18,7 @@ routes.forEach(route => {
   route.path = route.path || '/' + (route.name || '');
 });
 
-const router = new Router({ routes });
+const router = new window.window.VueRouter({ routes });
 
 router.beforeEach((to, from, next) => {
   const title = to.meta && to.meta.title;
