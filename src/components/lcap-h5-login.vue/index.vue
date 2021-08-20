@@ -1,5 +1,5 @@
 <template>
-  <div class="login-wrap">
+  <div class="h5template-login-wrap">
     <van-row class="login-title">登录</van-row>
     <van-form class="login-form">
       <van-field
@@ -245,7 +245,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-// .login-wrap {
+// .h5template-login-wrap {
 //   background-color: #ffffff;
 //   .login-title {
 //     font-family: PingFang SC;
@@ -294,6 +294,7 @@ export default {
 //     letter-spacing: 4.8vw;
 //     line-height: 12.8vw;
 //     color: #ffffff;
+//     border-radius: 1.06667vw;
 //   }
 // }
 </style>

@@ -10,6 +10,13 @@ const routes = [
     meta: {
       title: '登陆'
     }
+  },
+  {
+    name: 'mnavi',
+    component: () => import('./view/navi'),
+    meta: {
+      title: '导航'
+    }
   }
 ];
 
