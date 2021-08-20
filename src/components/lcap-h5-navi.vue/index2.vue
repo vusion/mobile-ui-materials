@@ -99,6 +99,7 @@ export default {
 
 <style lang="less">
 .h5template-navi {
+  padding: 4.26667vw;
   .navi-head {
     height: 11.73333vw;
     .nvai-top-image {

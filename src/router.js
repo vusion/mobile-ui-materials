@@ -17,6 +17,13 @@ const routes = [
     meta: {
       title: '导航'
     }
+  },
+  {
+    name: 'muser',
+    component: () => import('./view/user'),
+    meta: {
+      title: '导航'
+    }
   }
 ];
 
