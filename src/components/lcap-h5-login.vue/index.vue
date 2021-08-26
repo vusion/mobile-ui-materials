@@ -1,35 +1,40 @@
 <template>
-  <div class="h5template-login-wrap">
+  <van-row class="h5template-login-wrap">
     <van-row class="login-title">登录</van-row>
     <van-form class="login-form">
       <van-field
-        v-model="account.AccountId"
+        :value="AccountId"
         name="accountId"
         placeholder="请输入账号"
         class="login-cell"
         :rules="[{ required: true }]"
+        @input="(v) => updateV(v, 'AccountId')"
       >
         <template v-slot:left-icon>
-          <img :src="leftIconAccout" class="account-left-icon" />
+          <img
+            src="//static-vusion.nos-eastchina1.126.net/h5-template/account-icon.png"
+            class="account-left-icon"
+          />
         </template>
       </van-field>
       <van-field
-        v-model="account.AccountPassword"
-        :type="!eye ? 'password' : 'text'"
+        :value="AccountPassword"
+        :type="typeCom"
         name="accountPwd"
         placeholder="请输入密码"
         class="login-cell"
         :rules="[{ required: true }]"
+        @input="(v) => updateV(v, 'AccountPassword')"
       >
         <template v-slot:left-icon>
-          <img :src="leftIconPwd" class="account-left-icon" />
+          <img
+            src="//static-vusion.nos-eastchina1.126.net/h5-template/pwd-icon.png"
+            class="account-left-icon"
+          />
         </template>
         <template v-slot:right-icon>
-          <img
-            :src="!eye ? rightIconPwd : rightIconPwdOpen"
-            class="account-left-icon"
-            @click="changeEye"
-          />
+          <img v-if="eye" src="//static-vusion.nos-eastchina1.126.net/h5-template/eye-open-icon.png" class="account-left-icon" @click="changeEye" />
+          <img v-if="!eye" src="//static-vusion.nos-eastchina1.126.net/h5-template/eye-close-icon.png" class="account-left-icon" @click="changeEye" />
         </template>
       </van-field>
       <div style="margin-top: 8.53333vw">
@@ -43,7 +48,7 @@
         >
       </div>
     </van-form>
-  </div>
+  </van-row>
 </template>
 
 <script>
@@ -156,31 +161,15 @@ const tokenUtil = {
     cookieUtil.eraseAll();
   },
 };
-// const getTenant = () => {
-//     const hostArr = location.host.split('.');
-//     const len = hostArr.length;
-//     return len > 3
-//         ? hostArr[0]
-//         : 'defaultTenant'; // 默认租户配置为 defaultTenant
-// };
+
 export default {
   name: "lcap-h5-login",
   data() {
     return {
       eye: false,
-      account: {
-        LoginType: "Normal",
-        AccountId: "",
-        AccountPassword: "",
-      },
-      leftIconAccout:
-        "//static-vusion.nos-eastchina1.126.net/h5-template/account-icon.png",
-      leftIconPwd:
-        "//static-vusion.nos-eastchina1.126.net/h5-template/pwd-icon.png",
-      rightIconPwdOpen:
-        "//static-vusion.nos-eastchina1.126.net/h5-template/eye-open-icon.png",
-      rightIconPwd:
-        "//static-vusion.nos-eastchina1.126.net/h5-template/eye-close-icon.png",
+      LoginType: "Normal",
+      AccountId: "",
+      AccountPassword: "",
       // 租户级别基础登录配置
       tenantLoginTypesLoading: true,
       tenantLoginTypes: [],
@@ -190,7 +179,24 @@ export default {
       configLoginTypes: ["Normal"],
     };
   },
+  computed: {
+    typeCom() {
+      if (!this.eye) {
+        return "password";
+      }
+      return "text";
+    },
+  },
   methods: {
+    eyeCom() {
+      if (!this.eye) {
+        return "//static-vusion.nos-eastchina1.126.net/h5-template/eye-close-icon.png";
+      }
+      return "//static-vusion.nos-eastchina1.126.net/h5-template/eye-open-icon.png";
+    },
+    updateV(v, name) {
+      this[name] = v;
+    },
     changeEye() {
       this.eye = !this.eye;
     },
@@ -200,7 +206,7 @@ export default {
     },
     async login() {
       const LoginType = "Normal";
-      const { AccountId, AccountPassword } = this.account;
+      const { AccountId, AccountPassword } = this;
       const {
         tenant,
         domainName,
@@ -226,7 +232,7 @@ export default {
           UserName,
           UserId,
         };
-        this.setCookie({
+        cookieUtil.set({
           authorization: Authorization,
           userName: UserName,
           userId: UserId,
@@ -246,6 +252,7 @@ export default {
 
 <style scoped lang="less">
 .h5template-login-wrap {
+  height: 100vh;
   padding: 4.26667vw;
   background-color: #ffffff;
   .login-title {

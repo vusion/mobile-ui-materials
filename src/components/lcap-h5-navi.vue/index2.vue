@@ -1,5 +1,5 @@
 <template>
-  <div class="h5template-navi">
+  <van-row class="h5template-navi" vusion-nested="true">
     <van-row
       class="navi-head"
       type="flex"
@@ -7,88 +7,89 @@
       align="center"
     >
       <van-col>
-        <img
-          :src="topConIcon"
+        <van-image
+          src="//static-vusion.nos-eastchina1.126.net/h5-template/top-con-icon.png"
           class="nvai-top-image"
           @click="changenavLeftPop"
-        />
+        ></van-image>
       </van-col>
-      <van-col><van-image :src="human" class="nvai-top-image" @click="clickHuman"></van-image></van-col>
+      <van-col
+        ><van-image
+          src="//static-vusion.nos-eastchina1.126.net/h5-template/human-icon.png"
+          class="nvai-top-image"
+          @click="clickHuman"
+        ></van-image
+      ></van-col>
     </van-row>
-    <van-popup><div style="height: 30vh; width: 30vw">内容</div></van-popup>
     <van-popup
-      :value="navLeftPop"
       position="left"
-      class="diy-content"
+      ref="demoNvaiPop"
       @click-overlay="changenavLeftPop"
     >
-      <van-cell title="导航一" center border>
-        <template v-slot:icon>
-          <img
-            src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
-            class="navi-item-icon"
-          />
-        </template>
-      </van-cell>
-      <van-cell title="导航二" center border>
-        <template v-slot:icon>
-          <img
-            src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
-            class="navi-item-icon"
-          />
-        </template>
-      </van-cell>
-      <van-cell title="导航三" center border>
-        <template v-slot:icon>
-          <img
-            src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
-            class="navi-item-icon"
-          />
-        </template>
-      </van-cell>
-      <van-cell title="导航四" center border>
-        <template v-slot:icon>
-          <img
-            src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
-            class="navi-item-icon"
-          />
-        </template>
-      </van-cell>
-      <van-cell title="导航五" center border>
-        <template v-slot:icon>
-          <img
-            src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
-            class="navi-item-icon"
-          />
-        </template>
-      </van-cell>
-      <van-cell title="导航六" center border>
-        <template v-slot:icon>
-          <img
-            src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
-            class="navi-item-icon"
-          />
-        </template>
-      </van-cell>
+      <div class="diy-content">
+        <van-cell title="导航一" center border>
+          <template v-slot:icon>
+            <img
+              src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
+              class="navi-item-icon"
+            />
+          </template>
+        </van-cell>
+        <van-cell title="导航二" center border>
+          <template v-slot:icon>
+            <img
+              src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
+              class="navi-item-icon"
+            />
+          </template>
+        </van-cell>
+        <van-cell title="导航三" center border>
+          <template v-slot:icon>
+            <img
+              src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
+              class="navi-item-icon"
+            />
+          </template>
+        </van-cell>
+        <van-cell title="导航四" center border>
+          <template v-slot:icon>
+            <img
+              src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
+              class="navi-item-icon"
+            />
+          </template>
+        </van-cell>
+        <van-cell title="导航五" center border>
+          <template v-slot:icon>
+            <img
+              src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
+              class="navi-item-icon"
+            />
+          </template>
+        </van-cell>
+        <van-cell title="导航六" center border>
+          <template v-slot:icon>
+            <img
+              src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
+              class="navi-item-icon"
+            />
+          </template>
+        </van-cell>
+      </div>
     </van-popup>
-  </div>
+  </van-row>
 </template>
 
 <script>
 export default {
   name: "lcap-h5-navi",
   data() {
-    return {
-      topConIcon:
-        "//static-vusion.nos-eastchina1.126.net/h5-template/top-con-icon.png",
-      human:
-        "//static-vusion.nos-eastchina1.126.net/h5-template/human-icon.png",
-      navLeftPop: false,
-    };
+    return {};
   },
   methods: {
     changenavLeftPop() {
-      this.navLeftPop = !this.navLeftPop;
+      console.log(this);
+      this.$refs.demoNvaiPop.value = !this.$refs.demoNvaiPop.value;
     },
     clickHuman() {
       console.log("click human");
@@ -99,6 +100,7 @@ export default {
 
 <style lang="less">
 .h5template-navi {
+  height: 100%;
   padding: 4.26667vw;
   .navi-head {
     height: 11.73333vw;
@@ -112,8 +114,8 @@ export default {
     width: 6.4vw;
     margin-right: 4.26667vw;
   }
-  .diy-content{
-    height: 100%;
+  .diy-content {
+    height: 100vh;
     width: 86.13333vw;
     overflow: auto;
     padding-top: 11.73333vw;

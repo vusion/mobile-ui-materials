@@ -1,5 +1,5 @@
 <template>
-  <div class="h5template-user">
+  <van-row class="h5template-user">
     <van-row class="user-head-wrap" type="flex" align="center">
       <van-image
         src="//static-vusion.nos-eastchina1.126.net/h5-template/head-icon.png"
@@ -44,7 +44,7 @@
     <van-row class="user-logout" style="margin-top: 2.13333vw" @click="logout">
       退出登录
     </van-row>
-  </div>
+  </van-row>
 </template>
 
 <script>
