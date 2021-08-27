@@ -161,7 +161,7 @@ export default {
   name: "lcap-h5-user",
   data() {
     return {
-      username: cookieUtil.get("userName") || '默认名字',
+      username: cookieUtil.get("userName") || "默认名字",
     };
   },
   methods: {
@@ -172,7 +172,7 @@ export default {
       })
         .then(async () => {
           try {
-            await this.$services.Logout();
+            await this.$auth.logout();
           } catch (error) {
             console.warn(error);
           }

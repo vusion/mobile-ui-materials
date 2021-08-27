@@ -8,7 +8,7 @@
         placeholder="请输入账号"
         class="login-cell"
         :rules="[{ required: true }]"
-        @input="(v) => updateV(v, 'AccountId')"
+        @input="updateVAcc"
       >
         <template v-slot:left-icon>
           <img
@@ -19,22 +19,20 @@
       </van-field>
       <van-field
         :value="AccountPassword"
-        :type="typeCom"
+        :type="passwordortext"
         name="accountPwd"
         placeholder="请输入密码"
         class="login-cell"
         :rules="[{ required: true }]"
-        @input="(v) => updateV(v, 'AccountPassword')"
+        eye="yes"
+        @input="updateVPwd"
+        @click-right-icon="clickRightIcon"
       >
         <template v-slot:left-icon>
           <img
             src="//static-vusion.nos-eastchina1.126.net/h5-template/pwd-icon.png"
             class="account-left-icon"
           />
-        </template>
-        <template v-slot:right-icon>
-          <img v-if="eye" src="//static-vusion.nos-eastchina1.126.net/h5-template/eye-open-icon.png" class="account-left-icon" @click="changeEye" />
-          <img v-if="!eye" src="//static-vusion.nos-eastchina1.126.net/h5-template/eye-close-icon.png" class="account-left-icon" @click="changeEye" />
         </template>
       </van-field>
       <div style="margin-top: 8.53333vw">
@@ -167,6 +165,7 @@ export default {
   data() {
     return {
       eye: false,
+      passwordortext: "password",
       LoginType: "Normal",
       AccountId: "",
       AccountPassword: "",
@@ -179,14 +178,7 @@ export default {
       configLoginTypes: ["Normal"],
     };
   },
-  computed: {
-    typeCom() {
-      if (!this.eye) {
-        return "password";
-      }
-      return "text";
-    },
-  },
+  computed: {},
   methods: {
     eyeCom() {
       if (!this.eye) {
@@ -194,51 +186,60 @@ export default {
       }
       return "//static-vusion.nos-eastchina1.126.net/h5-template/eye-open-icon.png";
     },
-    updateV(v, name) {
-      this[name] = v;
+    updateVAcc(v) {
+      this.AccountId = v;
     },
-    changeEye() {
-      this.eye = !this.eye;
+    updateVPwd(v) {
+      this.AccountPassword = v;
+    },
+    clickRightIcon() {
+      const now = this.passwordortext;
+      if (now === "password") {
+        this.passwordortext = "text";
+      } else {
+        this.passwordortext = "password";
+      }
     },
     onSubmit() {
       console.log("submit");
       this.login();
     },
-    async login() {
+    login() {
       const LoginType = "Normal";
       const { AccountId, AccountPassword } = this;
+      if (!(AccountId.length > 0 && AccountPassword.length > 0)) {
+        return;
+      }
       const {
         tenant,
         domainName,
         nuimsDomain = "user.lcap.163yun.com",
       } = window.appInfo;
       try {
-        const res = await this.$services.Login({
-          body: {
-            UserName: AccountId,
-            Password: AccountPassword,
-            LoginType,
-            TenantName: tenant,
-            DomainName: domainName,
-          },
-          config: {
-            noAlert: true,
-          },
-        });
-        const { UserName, UserId } = res;
-        const Authorization = tokenUtil.get();
-        const dData = {
-          Authorization: Authorization,
-          UserName,
-          UserId,
-        };
-        cookieUtil.set({
-          authorization: Authorization,
-          userName: UserName,
-          userId: UserId,
-        });
-        this.$emit("success", dData);
-        location.href = "/";
+        this.$auth
+          .loginH5({
+            body: {
+              UserName: AccountId,
+              Password: AccountPassword,
+              LoginType,
+              TenantName: tenant,
+              DomainName: domainName,
+            },
+            config: {
+              noAlert: true,
+            },
+          })
+          .then((res) => {
+            console.log(res);
+            if (res.Code === "Success") {
+              cookieUtil.set({
+                authorization: res.authorization,
+                userName: res.Data.UserName,
+                userId: res.Data.UserId,
+              });
+              location.href = "/";
+            }
+          });
       } catch (error) {
         window.vant.Notify({
           type: "danger",
@@ -251,58 +252,64 @@ export default {
 </script>
 
 <style scoped lang="less">
-.h5template-login-wrap {
-  height: 100vh;
-  padding: 4.26667vw;
-  background-color: #ffffff;
-  .login-title {
-    font-family: PingFang SC;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 7.46667vw;
-    line-height: 10.4vw;
-    color: #333333;
-    margin-bottom: 14.93333vw;
-  }
-  .login-form {
-  }
-  .login-cell {
-    padding: 0;
-    line-height: 10.4vw;
-    background: #f6f6f6;
-    border-radius: 1.06667vw;
-    margin-bottom: 4.26667vw;
-  }
-  .login-cell /deep/ .van-field__left-icon {
-    margin-right: 3.2vw;
-    margin-left: 3.2vw;
-    display: flex;
-    align-items: center;
-  }
-  .login-cell /deep/ .van-field__right-icon {
-    margin-right: 4.26667vw;
-    margin-left: 0;
-    display: flex;
-    align-items: center;
-    padding: 0;
-  }
-  .login-cell /deep/ .van-field__control {
-    color: #aaa;
-  }
-  .account-left-icon {
-    width: 6.4vw;
-    height: 6.4vw;
-  }
-  .cus-login-button {
-    background: #4c88ff;
-    font-family: PingFang SC;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 4.8vw;
-    letter-spacing: 4.8vw;
-    line-height: 12.8vw;
-    color: #ffffff;
-    border-radius: 1.06667vw;
-  }
-}
+// .h5template-login-wrap {
+//   height: 100vh;
+//   padding: 4.26667vw;
+//   background-color: #ffffff;
+//   .login-title {
+//     font-family: PingFang SC;
+//     font-style: normal;
+//     font-weight: 500;
+//     font-size: 7.46667vw;
+//     line-height: 10.4vw;
+//     color: #333333;
+//     margin-bottom: 14.93333vw;
+//   }
+//   .login-form {
+//   }
+//   .login-cell {
+//     padding: 0;
+//     line-height: 10.4vw;
+//     background: #f6f6f6;
+//     border-radius: 1.06667vw;
+//     margin-bottom: 4.26667vw;
+//   }
+//   .login-cell /deep/ .van-field__left-icon {
+//     margin-right: 3.2vw;
+//     margin-left: 3.2vw;
+//     display: flex;
+//     align-items: center;
+//   }
+//   .login-cell /deep/ .van-field__right-icon {
+//     margin-right: 4.26667vw;
+//     margin-left: 0;
+//     display: flex;
+//     align-items: center;
+//     padding: 0;
+
+//     img {
+//       display: block;
+//       width: 6.4vw;
+//       height: 6.4vw;
+//     }
+//   }
+//   .login-cell /deep/ .van-field__control {
+//     color: #aaa;
+//   }
+//   .account-left-icon {
+//     width: 6.4vw;
+//     height: 6.4vw;
+//   }
+//   .cus-login-button {
+//     background: #4c88ff;
+//     font-family: PingFang SC;
+//     font-style: normal;
+//     font-weight: 500;
+//     font-size: 4.8vw;
+//     letter-spacing: 4.8vw;
+//     line-height: 12.8vw;
+//     color: #ffffff;
+//     border-radius: 1.06667vw;
+//   }
+// }
 </style>
