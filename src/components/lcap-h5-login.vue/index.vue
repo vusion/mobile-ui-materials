@@ -1,5 +1,5 @@
 <template>
-  <van-row class="h5template-login-wrap">
+  <div class="h5template-login-wrap" vusion-slot-name="default">
     <van-row class="login-title">登录</van-row>
     <van-form class="login-form">
       <van-field
@@ -46,7 +46,7 @@
         >
       </div>
     </van-form>
-  </van-row>
+  </div>
 </template>
 
 <script>
@@ -141,6 +141,7 @@ const cookieUtil = {
     }
   },
 };
+// eslint-disable-next-line no-unused-vars
 const tokenUtil = {
   set(Authorization) {
     token = Authorization;
@@ -213,6 +214,7 @@ export default {
       const {
         tenant,
         domainName,
+        // eslint-disable-next-line no-unused-vars
         nuimsDomain = "user.lcap.163yun.com",
       } = window.appInfo;
       try {

@@ -1,5 +1,5 @@
 <template>
-  <van-row class="h5template-navi" vusion-nested="true">
+  <div class="h5template-navi" vusion-slot-name="default">
     <van-row
       class="navi-head"
       type="flex"
@@ -12,6 +12,9 @@
           class="nvai-top-image"
           @click="changenavLeftPop"
         ></van-image>
+      </van-col>
+      <van-col>
+        <van-text text="轻舟低代码"></van-text>
       </van-col>
       <van-col
         ><van-image
@@ -29,55 +32,63 @@
       <div class="diy-content">
         <van-cell title="导航一" center border>
           <template v-slot:icon>
-            <img
+            <van-image
               src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
               class="navi-item-icon"
-            />
+              @click="noop"
+            >
+            </van-image>
           </template>
         </van-cell>
         <van-cell title="导航二" center border>
           <template v-slot:icon>
-            <img
+            <van-image
               src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
               class="navi-item-icon"
-            />
+              @click="noop"
+            >
+            </van-image>
           </template>
         </van-cell>
         <van-cell title="导航三" center border>
           <template v-slot:icon>
-            <img
+            <van-image
               src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
               class="navi-item-icon"
-            />
+              @click="noop"
+            ></van-image>
           </template>
         </van-cell>
         <van-cell title="导航四" center border>
           <template v-slot:icon>
-            <img
+            <van-image
               src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
               class="navi-item-icon"
-            />
+              @click="noop"
+            ></van-image>
           </template>
         </van-cell>
         <van-cell title="导航五" center border>
           <template v-slot:icon>
-            <img
+            <van-image
               src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
               class="navi-item-icon"
-            />
+              @click="noop"
+            ></van-image>
           </template>
         </van-cell>
         <van-cell title="导航六" center border>
           <template v-slot:icon>
-            <img
+            <van-image
               src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
               class="navi-item-icon"
-            />
+              @click="noop"
+            ></van-image>
           </template>
         </van-cell>
       </div>
     </van-popup>
-  </van-row>
+  </div>
 </template>
 
 <script>
@@ -94,6 +105,7 @@ export default {
     clickHuman() {
       console.log("click human");
     },
+    noop() {},
   },
 };
 </script>
