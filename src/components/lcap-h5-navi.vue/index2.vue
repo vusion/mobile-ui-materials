@@ -88,6 +88,7 @@
         </van-cell>
       </div>
     </van-popup>
+    <van-router-view></van-router-view>
   </div>
 </template>
 
