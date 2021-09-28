@@ -7,7 +7,7 @@
         name="accountId"
         placeholder="请输入账号"
         class="login-cell"
-        :rules="[{ required: true }]"
+        rules="required"
         @input="updateVAcc"
       >
         <template v-slot:left-icon>
@@ -23,7 +23,7 @@
         name="accountPwd"
         placeholder="请输入密码"
         class="login-cell"
-        :rules="[{ required: true }]"
+        rules="required"
         eye="yes"
         @input="updateVPwd"
         @click-right-icon="clickRightIcon"
