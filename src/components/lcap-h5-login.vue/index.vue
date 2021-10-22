@@ -243,7 +243,7 @@ export default {
             }
           });
       } catch (error) {
-        window.vant.Notify({
+        window.vant.VanNotify({
           type: "danger",
           message: "请输入正确的账号或密码",
         });

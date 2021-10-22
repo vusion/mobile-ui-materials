@@ -171,7 +171,7 @@ export default {
   },
   methods: {
     logout() {
-      window.vant.Dialog.confirm({
+      window.vant.VanDialog.confirm({
         title: "提示",
         message: "确定退出登录吗",
       })
