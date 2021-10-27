@@ -13,9 +13,9 @@
           @click="changenavLeftPop"
         ></van-image>
       </van-col>
-      <van-col>
+      <!-- <van-col>
         <van-text text="轻舟低代码"></van-text>
-      </van-col>
+      </van-col> -->
       <van-col
         ><van-image
           src="//static-vusion.nos-eastchina1.126.net/h5-template/human-icon.png"
