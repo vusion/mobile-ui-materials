@@ -193,43 +193,43 @@ export default {
 </script>
 
 <style lang="less">
-.h5template-user {
-  width: 100vw;
-  height: 100vh;
-  background-color: #f6f6f6;
-  .user-head-wrap {
-    height: 42.66667vw;
-    background-color: #fff;
-    padding-left: 6.4vw;
+// .h5template-user {
+//   width: 100vw;
+//   height: 100vh;
+//   background-color: #f6f6f6;
+//   .user-head-wrap {
+//     height: 42.66667vw;
+//     background-color: #fff;
+//     padding-left: 6.4vw;
 
-    .user-avatar {
-      width: 17.06667vw;
-      height: 17.06667vw;
-      margin-right: 4.26667vw;
-    }
-    .user-name {
-      font-family: PingFang SC;
-      font-style: normal;
-      font-weight: 500;
-      font-size: 5.33333vw;
-      line-height: 5.33333vw;
-      color: #333333;
-    }
-  }
-  .navi-item-icon {
-    display: block;
-    width: 6.4vw;
-    margin-right: 4.26667vw;
-  }
-  .user-logout {
-    line-height: 14.93333vw;
-    background: #ffffff;
-    text-align: center;
-    font-family: PingFang SC;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 4.26667vw;
-    color: #f55a4c;
-  }
-}
+//     .user-avatar {
+//       width: 17.06667vw;
+//       height: 17.06667vw;
+//       margin-right: 4.26667vw;
+//     }
+//     .user-name {
+//       font-family: PingFang SC;
+//       font-style: normal;
+//       font-weight: 500;
+//       font-size: 5.33333vw;
+//       line-height: 5.33333vw;
+//       color: #333333;
+//     }
+//   }
+//   .navi-item-icon {
+//     display: block;
+//     width: 6.4vw;
+//     margin-right: 4.26667vw;
+//   }
+//   .user-logout {
+//     line-height: 14.93333vw;
+//     background: #ffffff;
+//     text-align: center;
+//     font-family: PingFang SC;
+//     font-style: normal;
+//     font-weight: normal;
+//     font-size: 4.26667vw;
+//     color: #f55a4c;
+//   }
+// }
 </style>

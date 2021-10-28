@@ -35,7 +35,7 @@
           />
         </template>
       </van-field>
-      <div style="margin-top: 8.53333vw">
+      <div style="margin-top: 8.53333vw;">
         <van-button
           block
           type="info"

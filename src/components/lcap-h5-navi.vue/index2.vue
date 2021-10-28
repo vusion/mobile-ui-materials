@@ -112,26 +112,26 @@ export default {
 </script>
 
 <style lang="less">
-.h5template-navi {
-  height: 100%;
-  padding: 4.26667vw;
-  .navi-head {
-    height: 11.73333vw;
-    .nvai-top-image {
-      width: 6.4vw;
-      display: block;
-    }
-  }
-  .navi-item-icon {
-    display: block;
-    width: 6.4vw;
-    margin-right: 4.26667vw;
-  }
-  .diy-content {
-    height: 100vh;
-    width: 86.13333vw;
-    overflow: auto;
-    padding-top: 11.73333vw;
-  }
-}
+// .h5template-navi {
+//   height: 100%;
+//   padding: 4.26667vw;
+//   .navi-head {
+//     height: 11.73333vw;
+//     .nvai-top-image {
+//       width: 6.4vw;
+//       display: block;
+//     }
+//   }
+//   .navi-item-icon {
+//     display: block;
+//     width: 6.4vw;
+//     margin-right: 4.26667vw;
+//   }
+//   .diy-content {
+//     height: 100vh;
+//     width: 86.13333vw;
+//     overflow: auto;
+//     padding-top: 11.73333vw;
+//   }
+// }
 </style>
