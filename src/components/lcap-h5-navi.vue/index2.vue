@@ -106,7 +106,9 @@ export default {
     clickHuman() {
       console.log("click human");
     },
-    noop() {},
+    noop() {
+      return null;
+    },
   },
 };
 </script>
