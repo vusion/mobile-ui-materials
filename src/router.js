@@ -1,4 +1,3 @@
-import Vue from 'vue';
 // import Router from 'vue-router';
 
 // Vue.use(Router);
@@ -21,6 +20,20 @@ const routes = [
   {
     name: 'muser',
     component: () => import('./view/user'),
+    meta: {
+      title: '导航'
+    }
+  },
+  {
+    name: '401',
+    component: () => import('./view/401'),
+    meta: {
+      title: '导航'
+    }
+  },
+  {
+    name: '404',
+    component: () => import('./view/404'),
     meta: {
       title: '导航'
     }
