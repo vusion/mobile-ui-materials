@@ -8,43 +8,10 @@
       <div class="user-name">{{ username }}</div>
     </van-row>
     <van-row class="user-middle" style="margin-top: 2.13333vw">
-      <van-cell title="内容一" center border is-link>
-        <template v-slot:icon>
-          <van-image
-            src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
-            class="navi-item-icon"
-            @click="noop"
-          >
-          </van-image>
-        </template>
-      </van-cell>
-      <van-cell title="内容二" center border is-link>
-        <template v-slot:icon>
-          <van-image
-            src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
-            class="navi-item-icon"
-            @click="noop"
-          ></van-image>
-        </template>
-      </van-cell>
-      <van-cell title="内容三" center border is-link>
-        <template v-slot:icon>
-          <van-image
-            src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
-            class="navi-item-icon"
-            @click="noop"
-          ></van-image>
-        </template>
-      </van-cell>
-      <van-cell title="内容四" center border is-link>
-        <template v-slot:icon>
-          <van-image
-            src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
-            class="navi-item-icon"
-            @click="noop"
-          ></van-image>
-        </template>
-      </van-cell>
+      <van-cell title="内容一" center border is-link icon="程序"></van-cell>
+      <van-cell title="内容二" center border is-link icon="程序"></van-cell>
+      <van-cell title="内容三" center border is-link icon="程序"></van-cell>
+      <van-cell title="内容四" center border is-link icon="程序"></van-cell>
     </van-row>
     <van-row class="user-logout" style="margin-top: 2.13333vw" @click="logout">
       退出登录

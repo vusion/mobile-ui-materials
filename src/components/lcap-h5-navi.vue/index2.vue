@@ -7,85 +7,33 @@
       align="center"
     >
       <van-col>
-        <van-image
-          src="//static-vusion.nos-eastchina1.126.net/h5-template/top-con-icon.png"
+        <van-iconv
           class="nvai-top-image"
+          name="展开"
+          notext
           @click="changenavLeftPop"
-        ></van-image>
+        />
       </van-col>
       <van-col>
         <van-text text="轻舟低代码" class="lcp-title-navi"></van-text>
       </van-col>
-      <van-col
-        ><van-image
-          src="//static-vusion.nos-eastchina1.126.net/h5-template/human-icon.png"
+      <van-col>
+        <van-iconv
           class="nvai-top-image"
+          name="我的"
+          notext
           @click="clickHuman"
-        ></van-image
-      ></van-col>
+        />
+      </van-col>
     </van-row>
-    <van-popup
-      position="left"
-      ref="demoNvaiPop"
-      @click-overlay="changenavLeftPop"
-    >
+    <van-popup position="left" ref="demoNvaiPop" close-on-click-overlay>
       <div class="diy-content">
-        <van-cell title="导航一" center border>
-          <template v-slot:icon>
-            <van-image
-              src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
-              class="navi-item-icon"
-              @click="noop"
-            >
-            </van-image>
-          </template>
-        </van-cell>
-        <van-cell title="导航二" center border>
-          <template v-slot:icon>
-            <van-image
-              src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
-              class="navi-item-icon"
-              @click="noop"
-            >
-            </van-image>
-          </template>
-        </van-cell>
-        <van-cell title="导航三" center border>
-          <template v-slot:icon>
-            <van-image
-              src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
-              class="navi-item-icon"
-              @click="noop"
-            ></van-image>
-          </template>
-        </van-cell>
-        <van-cell title="导航四" center border>
-          <template v-slot:icon>
-            <van-image
-              src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
-              class="navi-item-icon"
-              @click="noop"
-            ></van-image>
-          </template>
-        </van-cell>
-        <van-cell title="导航五" center border>
-          <template v-slot:icon>
-            <van-image
-              src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
-              class="navi-item-icon"
-              @click="noop"
-            ></van-image>
-          </template>
-        </van-cell>
-        <van-cell title="导航六" center border>
-          <template v-slot:icon>
-            <van-image
-              src="//static-vusion.nos-eastchina1.126.net/h5-template/item-icon.png"
-              class="navi-item-icon"
-              @click="noop"
-            ></van-image>
-          </template>
-        </van-cell>
+        <van-cell title="导航一" center border icon="程序"></van-cell>
+        <van-cell title="导航二" center border icon="程序"></van-cell>
+        <van-cell title="导航三" center border icon="程序"></van-cell>
+        <van-cell title="导航四" center border icon="程序"></van-cell>
+        <van-cell title="导航五" center border icon="程序"></van-cell>
+        <van-cell title="导航六" center border icon="程序"></van-cell>
       </div>
     </van-popup>
     <van-router-view></van-router-view>
@@ -100,8 +48,7 @@ export default {
   },
   methods: {
     changenavLeftPop() {
-      console.log(this);
-      this.$refs.demoNvaiPop.value = !this.$refs.demoNvaiPop.value;
+      this.$refs.demoNvaiPop.realValue = true;
     },
     clickHuman() {
       console.log("click human");
