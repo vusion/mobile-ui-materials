@@ -7,7 +7,7 @@
       align="center"
     >
       <van-col>
-        <van-iconv class="nvai-top-image" name="展开" notext />
+        <van-iconv class="nvai-top-image" name="unfold" notext />
       </van-col>
       <van-col>
         <van-text text="轻舟低代码" class="lcp-title-navi"></van-text>
@@ -15,7 +15,7 @@
       <van-col>
         <van-iconv
           class="nvai-top-image"
-          name="我的"
+          name="avatar"
           notext
           @click="clickHuman"
         />

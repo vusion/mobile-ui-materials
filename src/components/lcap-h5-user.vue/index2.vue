@@ -8,10 +8,10 @@
       <div class="user-name">{{ username }}</div>
     </van-row>
     <van-row class="user-middle" style="margin-top: 2.13333vw">
-      <van-cell title="内容一" center border is-link icon="程序"></van-cell>
-      <van-cell title="内容二" center border is-link icon="程序"></van-cell>
-      <van-cell title="内容三" center border is-link icon="程序"></van-cell>
-      <van-cell title="内容四" center border is-link icon="程序"></van-cell>
+      <van-cell title="内容一" center border is-link icon="program"></van-cell>
+      <van-cell title="内容二" center border is-link icon="program"></van-cell>
+      <van-cell title="内容三" center border is-link icon="program"></van-cell>
+      <van-cell title="内容四" center border is-link icon="program"></van-cell>
     </van-row>
     <van-row class="user-logout" style="margin-top: 2.13333vw" @click="logout">
       退出登录
