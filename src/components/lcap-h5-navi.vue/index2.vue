@@ -23,12 +23,12 @@
     </van-row>
     <van-popup position="left" ref="demoNvaiPop" close-on-click-overlay>
       <div class="diy-content">
-        <van-cell title="导航一" center border icon="程序"></van-cell>
-        <van-cell title="导航二" center border icon="程序"></van-cell>
-        <van-cell title="导航三" center border icon="程序"></van-cell>
-        <van-cell title="导航四" center border icon="程序"></van-cell>
-        <van-cell title="导航五" center border icon="程序"></van-cell>
-        <van-cell title="导航六" center border icon="程序"></van-cell>
+        <van-cell title="导航一" center border icon="program"></van-cell>
+        <van-cell title="导航二" center border icon="program"></van-cell>
+        <van-cell title="导航三" center border icon="program"></van-cell>
+        <van-cell title="导航四" center border icon="program"></van-cell>
+        <van-cell title="导航五" center border icon="program"></van-cell>
+        <van-cell title="导航六" center border icon="program"></van-cell>
       </div>
     </van-popup>
     <van-router-view></van-router-view>
