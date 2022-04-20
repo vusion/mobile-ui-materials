@@ -160,8 +160,15 @@
      cookieUtil.eraseAll();
    },
  };
- 
- const rmLastSlash = (str) => {
+
+const getTenant = () => {
+    const hostArr = location.host.split('.');
+    const length = hostArr.length;
+    // 制品的租户标记
+    return hostArr[length - 3];
+};
+
+const rmLastSlash = (str) => {
 const cStr = String(str);
   return cStr[cStr.length - 1] === "/"
     ? cStr.substring(0, cStr.length - 1)
@@ -191,7 +198,7 @@ const cStr = String(str);
         const {
           search
         } = window.location;
-        const query = (void 0).$auth.parse(search) || {};
+        const query = this.$auth.parse(search) || {};
         const {
           code,
           userName,
@@ -205,11 +212,24 @@ const cStr = String(str);
             authorization: token
           });
           location.href = "/";
+        } else if (userName && userId && code) {
+          cookieUtil.set({
+            authorization: code
+          });
+          location.href = "/";
         } else {
-          (void 0).getConfig();
+          this.getTenantConfigs();
+          this.getConfig();
         }
 	 },
-   computed: {},
+   computed: {
+     passSrc() {
+         const nuimsDomain = window.appInfo.nuimsDomain;
+         const tenantUri = getTenant();
+         const src = `${window.location.protocol}//dev.${tenantUri}.${nuimsDomain}`;
+         return `${rmLastSlash(src)}`;
+      },
+   },
    methods: {
      eyeCom() {
        if (!this.eye) {
@@ -231,46 +251,47 @@ const cStr = String(str);
          this.passwordortext = "password";
        }
      },
-     passSrc() {
-         const nuimsDomain = window.appInfo.nuimsDomain;
-         const tenantUri = window.location.host.split('.')[0];
-         const src = `${window.location.protocol}//dev.${tenantUri}${nuimsDomain}`;
-         return `${rmLastSlash(src)}`;
-      },
      jumpAuth(type) {
-            const { search } = location;
-            const { redirect = encodeURIComponent(location.href) } = queryString.parse(search);
-            // 非下沉模式，需要跳转到 nuims 的集中登录
-            location.href = `${this.passSrc}/pass?redirect=${redirect}&loginType=C${type}`;
+          const {
+            search
+          } = location;
+          const {
+            redirect = encodeURIComponent(window.location.href)
+          } = this.$auth.parse(search); // 非下沉模式，需要跳转到 nuims 的集中登录
+
+          location.href = `${this.passSrc}/pass?redirect=${redirect}&loginType=C${type}`;
      },
      getTenantConfigs() {
        this.$auth.getNuims({
           Action: 'GetTenantLoginTypes',
           Version: '2020-06-01',
-          TenantName: window.location.host.split('.')[0],
-       }).then (res => {
-             const obj = res?.data?.Data.find((item) => (item.LoginType === Keycloak));
-            if (obj) {
-                  // 开启 KeyCloak 默认跳转 KeyCloak
-                  this.jumpAuth('Keycloak');
-            }
-       })
+          TenantName: getTenant(),
+        }).then(res => {
+          var _res$data;
+
+          const obj = res.Data.find(item => item.LoginType === 'Keycloak');
+
+          if (obj) {
+            // 开启 KeyCloak 默认跳转 KeyCloak
+            this.jumpAuth('Keycloak');
+          }
+        });
      },
      getConfig() {
          try {
-          (void 0).$auth.getConfig().then(res => {
-            const obj = JSON.parse(res.data.userCenter); // updata config
+          this.$auth.getConfig().then(res => {
+            const obj = JSON.parse(res?.data?.userCenter); // updata config
 
-            (void 0).changeConfig = obj;
-            (void 0).change = obj.change;
+            this.changeConfig = obj;
+            this.change = obj.change;
 
-            if ((void 0).change) {
+            if (this.change) {
               // 定位到第三方登录
               if (!window.location.href.includes('token=')) {
                 var _this$changeConfig$h, _this$changeConfig$h2;
 
                 // redirect back with token
-                window.location.href = `${(_this$changeConfig$h = (void 0).changeConfig.h5) === null || _this$changeConfig$h === void 0 ? void 0 : _this$changeConfig$h.url}?${(void 0).$auth.stringify(Object.assign(((_this$changeConfig$h2 = (void 0).changeConfig.h5) === null || _this$changeConfig$h2 === void 0 ? void 0 : _this$changeConfig$h2.params) || {}, {
+                window.location.href = `${(_this$changeConfig$h = this.changeConfig.h5) === null || _this$changeConfig$h === void 0 ? void 0 : _this$changeConfig$h.url}?${this.$auth.stringify(Object.assign(((_this$changeConfig$h2 = this.changeConfig.h5) === null || _this$changeConfig$h2 === void 0 ? void 0 : _this$changeConfig$h2.params) || {}, {
                   redirect_uri: window.location.href
                 }))}`;
               }
@@ -311,7 +332,6 @@ const cStr = String(str);
              },
            })
            .then((res) => {
-             console.log(res);
              if (res.Code === "Success") {
                cookieUtil.set({
                  authorization: res.authorization,

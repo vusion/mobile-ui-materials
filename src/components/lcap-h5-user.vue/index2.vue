@@ -133,8 +133,22 @@ export default {
   name: "lcap-h5-user",
   data() {
     return {
+      logoutUrl: '',
       username: cookieUtil.get("userName") || "默认名字",
     };
+  },
+  created() {
+      this.$auth.getNuims({
+        Action: 'GetTenantLoginTypes',
+        Version: '2020-06-01',
+        TenantName: getTenant(),
+      }).then(res => {
+
+        const KeycloakConfig = res.Data.find(item => (item.LoginType === 'Keycloak'));
+        if (KeycloakConfig) {
+            this.logoutUrl = `${KeycloakConfig?.extendProperties?.logout_url}?redirect_uri=${window.location.protocol}//${window.location.host}/login`;
+        }     
+      });
   },
   methods: {
     logout() {
@@ -144,7 +158,12 @@ export default {
       })
         .then(async () => {
           try {
-            await this.$auth.logout();
+            if (this.logoutUrl) {
+                window.location.href = this.logoutUrl;
+            } else {
+               await this.$auth.logout();
+            }
+           
           } catch (error) {
             console.warn(error);
           }
