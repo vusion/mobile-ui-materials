@@ -5,7 +5,7 @@
         src="//static-vusion.nos-eastchina1.126.net/h5-template/head-icon.png"
         class="user-avatar"
       ></van-image>
-      <div class="user-name">{{ username }}</div>
+      <div class="user-name"><van-text :text="username"></van-text></div>
     </van-row>
     <van-row class="user-middle" style="margin-top: 2.13333vw">
       <van-cell title="内容一" center border is-link icon="program"></van-cell>
@@ -14,7 +14,7 @@
       <van-cell title="内容四" center border is-link icon="program"></van-cell>
     </van-row>
     <van-row class="user-logout" style="margin-top: 2.13333vw" @click="logout">
-      退出登录
+      <van-text text="退出登录"></van-text>
     </van-row>
   </div>
 </template>
